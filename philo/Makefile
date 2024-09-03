@@ -6,7 +6,7 @@
 #    By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 15:36:45 by lcarrizo          #+#    #+#              #
-#    Updated: 2024/09/02 13:36:45 by lcarrizo         ###    ###london.com     #
+#    Updated: 2024/09/03 13:16:37 by lcarrizo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAGS			= -Wall -Werror -Wextra -I$(INCLUDE)
 
 $(NAME):		$(OBJ) $(OBJ_UTILS)
 				$(CC) $(CFLAGS) $(OBJ) $(OBJ_UTILS) -o $(NAME) -g
-				@echo "so_long executable created!"
+				@echo "philo executable created!"
 
 all:			$(NAME)
 
@@ -55,11 +55,11 @@ debug:
 
 bonus:
 				$(CC) $(CFLAGS) $(BONUS_SRCS) -o $(NAME) -g
-				@echo "so_long bonus created!"
+				@echo "philo bonus created!"
 
 clean:
 				$(RM) $(OBJ_DIR)
-				@echo "** clean so_long done!**"
+				@echo "** clean philo done!**"
 
 fclean:			clean
 				$(RM) $(NAME)
