@@ -6,12 +6,15 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:10:34 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/09/02 13:08:56 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/09/03 14:53:41 by lcarrizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
+
+int	error_message(int errtype, int errnum);
+int	print_error_message(int errnum);
 
 // MESAGE COLORS
 # define C_DEFAULT "\033[0;39m"
@@ -33,12 +36,26 @@
 # define BC_CYAN "\033[1;36m"
 # define BC_WHITE "\033[1;37m"
 
-// TYPE STATUROR
-# define FAIL 0
+// TYPE BOOL
+# define FALSE 0
+# define TRUE 1
+
+// TYPE STATUS
 # define SUCCESS 1
-# define SYS_ERROR 5
+# define FAIL 0
+
+# define INIT_ERR 1
+# define SYS_ERR 2
 
 // INIT PROGRAM ERRORS
 # define INV_N_ARG 100
+# define INV_T_ARG 101
+
+// ERROR MESSAGES
+# define MS_INV_N_ARG "Usage: ./philo <number_of_philosopher>  <time_to_die time_to_eat> \
+<time_to_sleep> [number_of_times_each_philosopher_must_eat]\n"
+# define MS_INV_T_ARG "The parameters must be numbers\n \
+Usage: ./philo <number_of_philosopher>  <time_to_die time_to_eat> \
+<time_to_sleep> [number_of_times_each_philosopher_must_eat]\n"
 
 #endif

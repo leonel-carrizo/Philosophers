@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:26:44 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/09/02 14:44:37 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/09/03 14:54:33 by lcarrizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@
 // object philosopher
 // object fork
 // object table
+
+long	ft_atol(const char *nbr);
+int		ft_isnumeric(char *str);
 
 #endif

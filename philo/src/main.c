@@ -6,39 +6,39 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 20:59:22 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/09/02 14:43:55 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/09/03 14:54:21 by lcarrizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h" // IWYU pragma: keep
 
-void	*comp(void *a)
+// close program, free memory if necessary
+int	exit_philo(int status)
 {
-	int	*num;
+	if (status != SUCCESS)
+		exit(status);
+	exit(EXIT_SUCCESS);
+}
 
-	num = (int *)a;
-	printf("Hola desde el hilo, recibi el numero: %d\n", *num);
-	return (NULL);
+// check arguments given
+int	check_args(int argc, char *argv[])
+{
+	int		i;
+
+	(void)argv;
+	if (argc < 4 || argc > 5)
+		exit_philo(print_error_message(INV_N_ARG));
+	i = -1;
+	while (argv[i])
+	{
+		if (ft_isnumeric(argv[i]) != FALSE)
+			exit_philo(print_error_message(INV_T_ARG));
+	}
+	return (SUCCESS);
 }
 
 int	main(int argc, char *argv[])
 {
-	int			n;
-	pthread_t	thread1;
-
-	(void)argc;
-	(void)argv;
-	n = 42;
-	if (pthread_create(&thread1, NULL, comp, &n) != 0)
-	{
-		perror("error muy loco");
-		return (1);
-	}
-	if (pthread_join(thread1, NULL) != 0)
-	{
-		perror("error mas loco");
-		return (2);
-	}
-	printf("Hilo terminado\n");
+	check_args(argc, argv);
 	return (EXIT_SUCCESS);
 }
