@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:26:44 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/09/03 14:54:33 by lcarrizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:16:53 by lcarrizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 // object table
 
 long	ft_atol(const char *nbr);
-int		ft_isnumeric(char *str);
+int		is_numeric(char *str);
+int		exit_philo(int status);
 
 #endif

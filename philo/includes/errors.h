@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:10:34 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/09/03 14:53:41 by lcarrizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:14:56 by lcarrizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	print_error_message(int errnum);
 # define C_PURPLE "\033[0;35m"
 # define C_CYAN "\033[0;36m"
 # define C_WHITE "\033[0;37m"
-
+// Bold colors
 # define BC_BLACK "\033[1;30m"
 # define BC_RED "\033[1;31m"
 # define BC_GREEN "\033[1;32m"
@@ -54,7 +54,7 @@ int	print_error_message(int errnum);
 // ERROR MESSAGES
 # define MS_INV_N_ARG "Usage: ./philo <number_of_philosopher>  <time_to_die time_to_eat> \
 <time_to_sleep> [number_of_times_each_philosopher_must_eat]\n"
-# define MS_INV_T_ARG "The parameters must be numbers\n \
+# define MS_INV_T_ARG "The parameters must be time expressed in numbers.\n\
 Usage: ./philo <number_of_philosopher>  <time_to_die time_to_eat> \
 <time_to_sleep> [number_of_times_each_philosopher_must_eat]\n"
 
