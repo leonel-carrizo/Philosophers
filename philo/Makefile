@@ -6,7 +6,7 @@
 #    By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 15:36:45 by lcarrizo          #+#    #+#              #
-#    Updated: 2024/09/03 13:16:37 by lcarrizo         ###   ########.fr        #
+#    Updated: 2024/11/04 21:35:42 by lcarrizo         ###    ###london.com     #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ $(OBJ_DIR)utils/%.o:		$(UTILS_DIR)%.c
 
 # create executables which can be debugged with gdb.
 debug:
-				$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -g
+				$(CC) $(CFLAGS) $(SRCS) $(wildcard $(UTILS_DIR)*.c) -o $(NAME) -g
 				@echo "Debugables Created!"
 
 bonus:
