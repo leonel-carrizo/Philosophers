@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:23:51 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/10/16 14:08:17 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/05 10:36:01 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	format_args(char **argv, int argc, int ar[])
 		else
 			return (INV_T_ARG);
 	}
-	return (TRUE);
+	return (SUCCESS);
 }
 
 /*checks if the parameters on *ar are between the seted limits
@@ -50,7 +50,7 @@ int	check_args(int *ar, int argc)
 		if (ar[N_MEALS] > MAX_N_MEALS || ar[4] < 1)
 			return (INV_N_MEALS);
 	}
-	return (TRUE);
+	return (SUCCESS);
 }
 
 // obtein the current time on miliseconds

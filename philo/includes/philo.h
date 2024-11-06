@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:26:44 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/10/17 15:26:04 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/05 10:44:05 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_data
 	int				n_meals_to_eat;
 	long			init_time;
 	pthread_mutex_t	message;
-	t_philo			*philo;
+	t_philo			*philos;
 }					t_data;
 
 // functions

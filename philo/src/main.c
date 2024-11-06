@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 20:59:22 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/10/17 15:26:13 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/06 07:17:36 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ static int	allocate_entities(t_data *data, int *ar)
 	if (ar[N_MEALS])
 		data->n_meals_to_eat = ar[N_MEALS];
 	data->init_time = get_time_in_ms();
-	data->philo = malloc(sizeof(t_philo) * ar[0]);
-	if (!data->philo)
+	data->philos = malloc(sizeof(t_philo) * ar[NRO_PHILOS]);
+	if (!data->philos)
 		return (SYS_ERROR);
 	i = 0;
 	while (i < ar[NRO_PHILOS])
 	{
-		memset(data->philo, 0, sizeof(t_philo));
-		data->philo[i].id = i + 1;
-		data->philo[i].time_to_die = ar[TIME_DIE];
-		data->philo[i].time_to_eat = ar[TIME_EAT];
-		data->philo[i].time_to_sleep = ar[TIME_SLEEP];
+		memset(data->philos, 0, sizeof(t_philo));
+		data->philos[i].id = i + 1;
+		data->philos[i].time_to_die = ar[TIME_DIE];
+		data->philos[i].time_to_eat = ar[TIME_EAT];
+		data->philos[i].time_to_sleep = ar[TIME_SLEEP];
 		if (ar[N_MEALS])
-			data->philo[i].n_meals = ar[N_MEALS];
+			data->philos[i].n_meals = ar[N_MEALS];
 		i++;
 	}
 	return (SUCCESS);
@@ -46,10 +46,11 @@ static int	init_data(t_data *data, char **argv, int argc)
 	static int	ar[MAX_ARGS - 1] = {0};
 
 	args_formated = format_args(argv, argc, ar);
-	if (args_formated != TRUE)
-		return (args_formated);
+	if (args_formated != SUCCESS)
+		return (args_formated);prendere.,Linux
+
 	args_ok = check_args(ar, argc);
-	if (args_ok != TRUE)
+	if (args_ok != SUCCESS)
 		return (args_ok);
 	if (allocate_entities(data, ar) != SUCCESS)
 		return (SYS_ERROR);
@@ -67,7 +68,7 @@ int	main(int argc, char *argv[])
 	printf("time is: %ld\n", data.init_time);
 	/*while(mutexes)*/
 	/*	free(mutexes);*/
-	free(data.philo);
+	free(data.philos);
 	/*free(forks);*/
 	return (EXIT_SUCCESS);
 }
