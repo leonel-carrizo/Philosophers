@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 20:59:22 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/06 07:17:36 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/07 14:54:40 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static int	init_data(t_data *data, char **argv, int argc)
 
 	args_formated = format_args(argv, argc, ar);
 	if (args_formated != SUCCESS)
-		return (args_formated);prendere.,Linux
-
+		return (args_formated);
 	args_ok = check_args(ar, argc);
 	if (args_ok != SUCCESS)
 		return (args_ok);
@@ -66,6 +65,7 @@ int	main(int argc, char *argv[])
 	if (init != SUCCESS)
 		return (error_message(INIT_ERR, init));
 	printf("time is: %ld\n", data.init_time);
+	print_time_from_ms(data.init_time);
 	/*while(mutexes)*/
 	/*	free(mutexes);*/
 	free(data.philos);
