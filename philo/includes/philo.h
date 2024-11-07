@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:26:44 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/05 10:44:05 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/07 14:54:13 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,21 @@ typedef struct s_data
 }					t_data;
 
 // functions
-long				ft_atol(const char *nbr);
 long				get_time_in_ms(void);
-int					ft_atoi(const char *nptr);
 int					format_args(char **argv, int argc, int ar[]);
-int					is_numeric(char *str);
 int					exit_philo(int status);
 int					error_message(int errtype, int errnum);
 int					check_args(int *ar, int argc);
 void				*philo_actions(void *arg);
 void				print_action(t_philo *philo, const char *action);
+
+// strting utils
+int					ft_atoi(const char *nptr);
+int					is_numeric(char *str);
+long				ft_atol(const char *nbr);
+void				*ft_calloc(size_t nmemb, size_t size);
+
+// times utils
+void				print_time_from_ms(long ms);
 
 #endif
