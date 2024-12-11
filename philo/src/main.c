@@ -6,69 +6,57 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 20:59:22 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/07 14:54:40 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/27 12:35:44 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h" // IWYU pragma: keep
+#include <bits/pthreadtypes.h>
+#include <pthread.h>
+#include <string.h>
 
-static int	allocate_entities(t_data *data, int *ar)
+int	init_threads(t_data *data, pthread_t **threads)
 {
 	int	i;
 
-	memset(data, 0, sizeof(t_data));
-	data->n_philos = ar[NRO_PHILOS];
-	if (ar[N_MEALS])
-		data->n_meals_to_eat = ar[N_MEALS];
-	data->init_time = get_time_in_ms();
-	data->philos = malloc(sizeof(t_philo) * ar[NRO_PHILOS]);
-	if (!data->philos)
+	*threads = (pthread_t *)malloc(sizeof(pthread_t) * data->n_philos);
+	if (!*threads)
 		return (SYS_ERROR);
 	i = 0;
-	while (i < ar[NRO_PHILOS])
+	while (i < data->n_philos)
 	{
-		memset(data->philos, 0, sizeof(t_philo));
-		data->philos[i].id = i + 1;
-		data->philos[i].time_to_die = ar[TIME_DIE];
-		data->philos[i].time_to_eat = ar[TIME_EAT];
-		data->philos[i].time_to_sleep = ar[TIME_SLEEP];
-		if (ar[N_MEALS])
-			data->philos[i].n_meals = ar[N_MEALS];
+		if (pthread_create(&(*threads)[i], NULL, philo_actions,
+			&data->philos[i]) != 0)
+		{
+			while (--i >= 0)
+				pthread_join((*threads)[i], NULL);
+			free(*threads);
+			return (SYS_ERROR);
+		}
 		i++;
 	}
 	return (SUCCESS);
 }
 
-static int	init_data(t_data *data, char **argv, int argc)
-{
-	int			args_ok;
-	int			args_formated;
-	static int	ar[MAX_ARGS - 1] = {0};
-
-	args_formated = format_args(argv, argc, ar);
-	if (args_formated != SUCCESS)
-		return (args_formated);
-	args_ok = check_args(ar, argc);
-	if (args_ok != SUCCESS)
-		return (args_ok);
-	if (allocate_entities(data, ar) != SUCCESS)
-		return (SYS_ERROR);
-	return (SUCCESS);
-}
-
 int	main(int argc, char *argv[])
 {
-	int		init;
-	t_data	data;
+	int			i;
+	int			init;
+	t_data		data;
+	pthread_t	*philos_threads;
+	pthread_t	monitor_thread;
 
 	init = init_data(&data, argv, argc);
 	if (init != SUCCESS)
 		return (error_message(INIT_ERR, init));
-	printf("time is: %ld\n", data.init_time);
-	print_time_from_ms(data.init_time);
-	/*while(mutexes)*/
-	/*	free(mutexes);*/
-	free(data.philos);
-	/*free(forks);*/
-	return (EXIT_SUCCESS);
+	if (init_threads(&data, &philos_threads) != SUCCESS)
+		return (clean_exit(&data, error_message(SYS_ERROR, FAIL_MEM_ALLOC)));
+	if (pthread_create(&monitor_thread, NULL, monitor_philos, &data) != 0)
+		return (clean_exit(&data, error_message(SYS_ERROR, FAIL_MEM_ALLOC)));
+	i = -1;
+	while (++i < data.n_philos)
+		pthread_join(philos_threads[i], NULL);
+	pthread_join(monitor_thread, NULL);
+	free(philos_threads);
+	return (clean_exit(&data, EXIT_SUCCESS));
 }

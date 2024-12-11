@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:23:51 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/05 10:36:01 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2024/11/26 10:14:43 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ int	check_args(int *ar, int argc)
 			return (INV_N_MEALS);
 	}
 	return (SUCCESS);
+}
+
+int	clean_exit(t_data *data, int exit_code)
+{
+	int	i;
+
+	if (data->forks)
+	{
+		i = -1;
+		while (++i < data->n_philos)
+			pthread_mutex_destroy(&data->forks[i]);
+		free(data->forks);
+	}
+	if (data->philos)
+		free(data->philos);
+	return (exit_code);
 }
 
 // obtein the current time on miliseconds
