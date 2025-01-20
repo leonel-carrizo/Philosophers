@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 10:06:06 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/27 12:41:00 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2025/01/17 12:52:13 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	allocate_entities(t_data *data, int *ar)
 	int	i;
 
 	memset(data, 0, sizeof(t_data));
-	printf("Hay un muerto %d\n", data->philo_died);
 	data->n_philos = ar[NRO_PHILOS];
 	data->init_time = get_time_in_ms();
 	data->time_to_die = ar[TIME_DIE];
@@ -53,7 +52,7 @@ static int	allocate_entities(t_data *data, int *ar)
 	i = 0;
 	while (++i < ar[NRO_PHILOS])
 	{
-		memset(data->philos, 0, sizeof(t_philo));
+		memset(&data->philos[i], 0, sizeof(t_philo));
 		data->philos[i].id = i;
 	}
 	return (SUCCESS);

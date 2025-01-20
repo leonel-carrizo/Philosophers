@@ -6,12 +6,11 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 20:59:22 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/27 12:35:44 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2025/01/17 13:37:59 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h" // IWYU pragma: keep
-#include <bits/pthreadtypes.h>
 #include <pthread.h>
 #include <string.h>
 

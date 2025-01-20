@@ -6,7 +6,7 @@
 /*   By: lcarrizo <lcarrizo@student.42london.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:34:49 by lcarrizo          #+#    #+#             */
-/*   Updated: 2024/11/27 11:43:27 by lcarrizo         ###    ###london.com    */
+/*   Updated: 2025/01/17 11:09:57 by lcarrizo         ###    ###london.com    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	*monitor_philos(void *arg)
 {
 	int		i;
+	long	xtime;
 	t_data	*data;
 
 	data = (t_data *)arg;
@@ -23,8 +24,8 @@ void	*monitor_philos(void *arg)
 		i = -1;
 		while (++i < data->n_philos)
 		{
-			if (!data->philos[i].is_eating
-				&& get_time_in_ms() - data->philos[i].last_meal_time > data->time_to_die)
+			xtime = get_time_in_ms() - data->philos[i].last_meal_time;
+			if (!data->philos[i].is_eating && xtime > data->time_to_die)
 			{
 				data->philo_died = 1;
 				pthread_mutex_lock(&data->message);
