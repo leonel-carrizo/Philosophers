@@ -25,7 +25,7 @@ int	init_threads(t_data *data, pthread_t **threads)
 	while (i < data->n_philos)
 	{
 		if (pthread_create(&(*threads)[i], NULL, philo_actions,
-			&data->philos[i]) != 0)
+			&data) != 0)
 		{
 			while (--i >= 0)
 				pthread_join((*threads)[i], NULL);

@@ -12,50 +12,50 @@
 
 #include "../includes/philo.h" // IWYU pragma: keep
 
-void	print_action(t_philo *philo, const char *action)
+void	print_action(t_data *data, const char *action)
 {
-	pthread_mutex_unlock(&philo->data->message);
-	printf("Philosopher %d %s\n", philo->id, action);
-	pthread_mutex_unlock(&philo->data->message);
+	pthread_mutex_lock(&data->message);
+	printf("Philosopher %d %s\n", data->philos->id, action);
+	pthread_mutex_unlock(&data->message);
 }
 
-void	philo_think(t_philo *philo)
+static void	philo_think(t_data *data)
 {
-	print_action(philo, "Is eating");
+	print_action(data, "Is eating");
 }
 
-void	philo_sleep(t_philo *philo)
-{
-	print_action(philo, "Is Sleeping");
-	usleep(philo->data->time_to_eat * 1000);
-}
-
-void	philo_eat(t_philo *philo)
-{
-	pthread_mutex_lock(philo->fork_left);
-	print_action(philo, "Has taken the left fork");
-	pthread_mutex_lock(philo->fork_right);
-	print_action(philo, "Has taken the right fork");
-	philo->is_eating = 1;
-	philo->last_meal_time = get_time_in_ms();
-	usleep(philo->data->time_to_eat * 1000);
-	philo->is_eating = 1;
-	philo->times_eaten++;
-	pthread_mutex_unlock(philo->fork_left);
-	pthread_mutex_unlock(philo->fork_right);
-}
+/*void	philo_sleep(t_philo *philo)*/
+/*{*/
+/*	print_action(philo, "Is Sleeping");*/
+/*	usleep(philo->data->time_to_eat * 1000);*/
+/*}*/
+/**/
+/*void	philo_eat(t_philo *philo)*/
+/*{*/
+/*	pthread_mutex_lock(philo->fork_left);*/
+/*	print_action(philo, "Has taken the left fork");*/
+/*	pthread_mutex_lock(philo->fork_right);*/
+/*	print_action(philo, "Has taken the right fork");*/
+/*	philo->is_eating = 1;*/
+/*	philo->last_meal_time = get_time_in_ms();*/
+/*	usleep(philo->data->time_to_eat * 1000);*/
+/*	philo->is_eating = 1;*/
+/*	philo->times_eaten++;*/
+/*	pthread_mutex_unlock(philo->fork_left);*/
+/*	pthread_mutex_unlock(philo->fork_right);*/
+/*}*/
 
 // create routines: thinking, sleeping, eating.
 void	*philo_actions(void *arg)
 {
-	t_philo	*philo;
+	t_data	*data;
 
-	philo = (t_philo *)arg;
-	while (philo->is_dead == 0)
+	data = (t_data *)arg;
+	while (data->philo_died == 0)
 	{
-		philo_think(philo);
-		philo_eat(philo);
-		philo_sleep(philo);
+		philo_think(data);
+		/*philo_eat(philo);*/
+		/*philo_sleep(philo);*/
 	}
 	return (NULL);
 }
